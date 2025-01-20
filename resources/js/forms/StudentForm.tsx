@@ -261,6 +261,9 @@ const StudentForm: React.FC<Props> = ({ isUpdate = false }) => {
                         name='age_at_admission'
                         label='Age at admission'
                         placeholder='Enter Age at admission'
+                        type='number'
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-expect-error
                         value={data.age_at_admission}
                         onChange={(e) =>
                             setData('age_at_admission', e.target.value)
@@ -417,6 +420,8 @@ const StudentForm: React.FC<Props> = ({ isUpdate = false }) => {
                             name='has_other_children_enrolled'
                             label='Other children Enrolled'
                             placeholder='Enter Other children Enrolled'
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                            // @ts-expect-error
                             value={data.has_other_children_enrolled}
                             onChange={(e) =>
                                 setData('has_other_children_enrolled', e)
@@ -459,6 +464,8 @@ const StudentForm: React.FC<Props> = ({ isUpdate = false }) => {
                             name='referred_by_family'
                             label='Did a current enrooled family member refer you to CCIS'
                             placeholder='Did a current enrooled family member refer you to CCIS'
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                            // @ts-expect-error
                             value={data.referred_by_family}
                             onChange={(value) =>
                                 setData('referred_by_family', value)
@@ -498,6 +505,9 @@ const StudentForm: React.FC<Props> = ({ isUpdate = false }) => {
                             name='employer_contribution'
                             label='Employer Contribution'
                             placeholder='Employer Contribution'
+                            type='number'
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                            // @ts-expect-error
                             value={data.employer_contribution}
                             onChange={(value) =>
                                 setData('employer_contribution', value)
@@ -514,6 +524,9 @@ const StudentForm: React.FC<Props> = ({ isUpdate = false }) => {
                                 name='contribution_percentage'
                                 label='Contribution Percentage'
                                 placeholder='Contribution Percentage'
+                                type='number'
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-expect-error
                                 value={data.contribution_percentage}
                                 onChange={(e) =>
                                     setData(

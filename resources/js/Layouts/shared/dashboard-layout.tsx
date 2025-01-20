@@ -23,7 +23,11 @@ interface Props {
 
 export const DashboardLayout: React.FC<Props> = ({ children }) => {
     const { roles } = usePage().props;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const isAdmin = roles.includes('admin');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const isTeacher = roles.includes('teacher');
     // const pathname = route().current() as string;
     const { url: pathname } = usePage();

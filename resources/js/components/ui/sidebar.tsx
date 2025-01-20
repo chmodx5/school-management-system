@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+import { IconButton } from './icon-button';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -281,11 +282,11 @@ const SidebarTrigger = React.forwardRef<
     const { toggleSidebar } = useSidebar();
 
     return (
-        <Button
+        <IconButton
             ref={ref}
             data-sidebar='trigger'
             variant='ghost'
-            size='icon'
+            size='sm'
             className={cn('h-7 w-7', className)}
             onClick={(event) => {
                 onClick?.(event);
@@ -295,7 +296,7 @@ const SidebarTrigger = React.forwardRef<
         >
             <PanelLeft />
             <span className='sr-only'>Toggle Sidebar</span>
-        </Button>
+        </IconButton>
     );
 });
 SidebarTrigger.displayName = 'SidebarTrigger';

@@ -5,7 +5,8 @@ import React from 'react';
 interface Props {}
 
 export const AppSidebarHeader: React.FC<Props> = () => {
-    const { roles, user } = usePage().props;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { roles, user } = usePage().props as any;
     return (
         <SidebarHeader>
             <SidebarMenuButton

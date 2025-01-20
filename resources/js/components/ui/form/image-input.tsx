@@ -1,12 +1,12 @@
-import { CloudUpload, X } from "lucide-react";
-import React from "react";
+import { CloudUpload, X } from 'lucide-react';
+import React from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { Card, CardDescription, CardTitle } from "../card";
-import { FormDescription, FormLabel } from "../form";
-import { IconButton } from "../icon-button/icon-button";
-import ImageContainer from "../image-container";
+import { Card, CardDescription, CardTitle } from '../card';
+import { FormDescription, FormLabel } from '../form';
+import { IconButton } from '../icon-button/icon-button';
+import ImageContainer from '../image-container';
 
 interface Props {
     label: string;
@@ -16,26 +16,7 @@ interface Props {
     onChange: (file: File | string | null) => void;
 }
 
-interface ErrorAndDescriptionMessageProps {
-    error?: string;
-    description?: string;
-}
-
-export const ErrorAndDescriptionMessage: React.FC<
-    ErrorAndDescriptionMessageProps
-> = ({ error, description }) => {
-    if (description && !error) {
-        return <FormDescription>{description}</FormDescription>;
-    } else if (description && error) {
-        return (
-            <FormDescription className="text-destructive">
-                {error}
-            </FormDescription>
-        );
-    }
-};
-
-const ImageInput: React.FC<Props> = ({
+export const ImageInput: React.FC<Props> = ({
     label,
     description,
     error,
@@ -44,7 +25,7 @@ const ImageInput: React.FC<Props> = ({
 }) => {
     const [image, setImage] = React.useState<string | null>(null);
     const [isDragging, setIsDragging] = React.useState(false);
-    const [_error, set_error] = React.useState<string | null>("");
+    const [_error, set_error] = React.useState<string | null>('');
 
     React.useEffect(() => {
         if (error) {
@@ -56,8 +37,8 @@ const ImageInput: React.FC<Props> = ({
         const maxSizeInMB = 10;
         const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
 
-        if (!file.type.startsWith("image/")) {
-            return "The selected file is not an image.";
+        if (!file.type.startsWith('image/')) {
+            return 'The selected file is not an image.';
         }
 
         if (file.size > maxSizeInBytes) {
@@ -91,7 +72,7 @@ const ImageInput: React.FC<Props> = ({
     const processFile = (file: File) => {
         if (file) {
             const checkImage = validateImage(file);
-            if (typeof checkImage === "string") {
+            if (typeof checkImage === 'string') {
                 set_error(checkImage);
                 onChange(checkImage);
             } else {
@@ -104,35 +85,33 @@ const ImageInput: React.FC<Props> = ({
                 reader.readAsDataURL(file);
 
                 onChange(file);
-                set_error("");
+                set_error('');
             }
         } else {
-            onChange("Please provide an image");
+            onChange('Please provide an image');
         }
     };
 
     return (
-        <div className="flex flex-col">
-            <FormLabel className={cn("", error && "text-destructive")}>
-                {label}
-            </FormLabel>
+        <div className='flex flex-col'>
+            <FormLabel label={label} hasError={Boolean(error)} />
 
             <Card
                 className={cn(
-                    " mt-3 border bg-background aspect-square border-dashed w-36 inline-flex items-center justify-center overflow-hidden ",
-                    isDragging ? "bg-muted-foreground" : ""
+                    'mt-3 inline-flex aspect-square w-36 items-center justify-center overflow-hidden border border-dashed bg-background',
+                    isDragging ? 'bg-muted-foreground' : '',
                 )}
             >
                 <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
+                    type='file'
+                    accept='image/*'
+                    className='hidden'
                     id={name}
                     onChange={handleImageChange}
                 />
-                <label htmlFor={name} className="w-full h-full ">
+                <label htmlFor={name} className='h-full w-full'>
                     <div
-                        className="w-full h-full flex items-center justify-center"
+                        className='flex h-full w-full items-center justify-center'
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
@@ -142,30 +121,27 @@ const ImageInput: React.FC<Props> = ({
                                 {isDragging ? (
                                     <CloudUpload
                                         className={cn(
-                                            isDragging ? "text-primary" : ""
+                                            isDragging ? 'text-primary' : '',
                                         )}
                                     />
                                 ) : (
                                     <ImageContainer
                                         src={image}
-                                        alt="image to be uploaded"
-                                        ratio="aspect-1/1"
+                                        alt='image to be uploaded'
+                                        ratio='aspect-1/1'
                                     />
                                 )}
                             </>
                         ) : (
                             <CloudUpload
-                                className={cn(isDragging ? "text-primary" : "")}
+                                className={cn(isDragging ? 'text-primary' : '')}
                             />
                         )}
                     </div>
                 </label>
             </Card>
 
-            <ErrorAndDescriptionMessage
-                error={_error || ""}
-                description={description}
-            />
+            <FormDescription error={_error || ''} description={description} />
         </div>
     );
 };
@@ -178,7 +154,7 @@ interface NewImageInputProps {
     onChange: (file: File[]) => void;
     previewImages?: File[];
     multiple?: boolean;
-    aspect?: "square" | "video";
+    aspect?: 'square' | 'video';
     imageContainerClasses?: string;
     onDeleteImage?: (file: File) => void;
     onImageClick?: (file: File) => void;
@@ -192,14 +168,14 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
     onChange,
     multiple = false,
     previewImages,
-    aspect = "square",
+    aspect = 'square',
     imageContainerClasses,
     onDeleteImage,
-    onImageClick,
+    // onImageClick,
 }) => {
     const [isDragging, setIsDragging] = React.useState(false);
     const [previewImageUrls, setPreviewImageUrls] = React.useState<string[]>(
-        []
+        [],
     );
 
     React.useEffect(() => {
@@ -207,7 +183,7 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
 
         if (previewImages && previewImages.length > 0) {
             const _imgurls = previewImages.map((file) =>
-                URL.createObjectURL(file)
+                URL.createObjectURL(file),
             );
             imageURLS = _imgurls;
         } else {
@@ -223,15 +199,15 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
 
     const EmptyContainer = () => {
         return (
-            <div className="text-center">
+            <div className='text-center'>
                 <CloudUpload
-                    className={cn("mx-auto", isDragging ? "text-primary" : "")}
+                    className={cn('mx-auto', isDragging ? 'text-primary' : '')}
                 />
-                <div className="px-2">
-                    <CardTitle className="mt-2 text-sm">
+                <div className='px-2'>
+                    <CardTitle className='mt-2 text-sm'>
                         Drop or select files
                     </CardTitle>
-                    <CardDescription className="mt-2 text-xs">
+                    <CardDescription className='mt-2 text-xs'>
                         Drop files here or click to select
                     </CardDescription>
                 </div>
@@ -239,23 +215,21 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
         );
     };
     return (
-        <div className="flex flex-col">
-            <FormLabel className={cn("", error && "text-destructive")}>
-                {label}
-            </FormLabel>
+        <div className='flex flex-col'>
+            <FormLabel label={label} hasError={Boolean(error)} />
 
             <Card
                 className={cn(
-                    " mt-3 border bg-background border-dashed w-36 inline-flex items-center justify-center overflow-hidden ",
+                    'mt-3 inline-flex w-36 items-center justify-center overflow-hidden border border-dashed bg-background',
                     imageContainerClasses,
-                    aspect === "square" ? "aspect-square" : "aspect-video",
-                    isDragging ? "bg-muted-foreground" : ""
+                    aspect === 'square' ? 'aspect-square' : 'aspect-video',
+                    isDragging ? 'bg-muted-foreground' : '',
                 )}
             >
                 <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
+                    type='file'
+                    accept='image/*'
+                    className='hidden'
                     id={name}
                     onChange={(e) => {
                         if (e.target.files)
@@ -263,9 +237,9 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
                     }}
                     multiple={multiple}
                 />
-                <label htmlFor={name} className="w-full h-full ">
+                <label htmlFor={name} className='h-full w-full'>
                     <div
-                        className="w-full h-full flex items-center justify-center"
+                        className='flex h-full w-full items-center justify-center'
                         onDragOver={(e: React.DragEvent<HTMLDivElement>) => {
                             e.preventDefault(); // Prevent default to allow drop
                             setIsDragging(true);
@@ -278,19 +252,19 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
                             setIsDragging(false);
                             if (e.dataTransfer.files)
                                 handleImageChange(
-                                    Array.from(e.dataTransfer.files)
+                                    Array.from(e.dataTransfer.files),
                                 );
                         }}
                     >
                         {!multiple && previewImageUrls.length == 1 ? (
-                            <div className="h-44 w-full">
+                            <div className='h-44 w-full'>
                                 {isDragging ? (
                                     <EmptyContainer />
                                 ) : (
                                     <ImageContainer
                                         src={previewImageUrls[0]}
-                                        alt="image to be uploaded"
-                                        ratio="aspect-1/1"
+                                        alt='image to be uploaded'
+                                        ratio='aspect-1/1'
                                     />
                                 )}
                             </div>
@@ -301,36 +275,27 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
                 </label>
             </Card>
 
-            <>
-                {error ||
-                    (description && (
-                        <FormDescription
-                            className={cn("mt-2", error && "text-destructive")}
-                        >
-                            {error || description}
-                        </FormDescription>
-                    ))}
-            </>
+            <FormDescription description={description} error={error} />
 
             {/* here we display the grid of multiple images  */}
             {previewImageUrls.length > 0 && (
-                <div className="grid grid-cols-12 gap-2 mt-2">
+                <div className='mt-2 grid grid-cols-12 gap-2'>
                     {previewImageUrls.map((url, index) => (
                         <div
-                            className="relative col-span-4 aspect-square"
+                            className='relative col-span-4 aspect-square'
                             key={index}
                         >
                             <ImageContainer
                                 src={url}
-                                alt="image to be uploaded"
-                                ratio="aspect-1/1"
+                                alt='image to be uploaded'
+                                ratio='aspect-1/1'
                             />
                             <IconButton
-                                type="button"
-                                size="xs"
-                                color="error"
-                                variant="outline"
-                                className="absolute top-2 right-2"
+                                type='button'
+                                size='xs'
+                                color='destructive'
+                                variant='outline'
+                                className='absolute right-2 top-2'
                                 onClick={() => {
                                     if (
                                         onDeleteImage &&
@@ -341,7 +306,7 @@ export const NewImageInput: React.FC<NewImageInputProps> = ({
                                     }
                                 }}
                             >
-                                <X className="w-3 h-3" />
+                                <X className='h-3 w-3' />
                             </IconButton>
                         </div>
                     ))}
