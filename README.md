@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -63,4 +63,62 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+
+# Installation Instructions
+
+## 1. Install Laravel
+
+- Open **PowerShell** as **Administrator**.
+- Paste the following command to install Laravel:
+    ```powershell
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
+    ```
+
+## 2. Download the Project
+
+- Go to the project repository at [School Management System GitHub](https://github.com/chmodx5/school-management-system).
+- Download the ZIP file.
+
+## 3. Extract the ZIP
+
+- Extract the downloaded ZIP file to a location of your choice.
+
+## 4. Navigate to the Project Folder
+
+- Open **Terminal** or **PowerShell** in the extracted folder.
+
+## 5. Install PHP Dependencies
+
+- Run the following command to install PHP dependencies via Composer:
+    ```bash
+    composer install
+    ```
+
+## 6. Install JavaScript Dependencies
+
+- Run the following command to install JavaScript dependencies via npm:
+    ```bash
+    npm install
+    ```
+
+## 7. Build Assets
+
+- Run the following command to compile and build the frontend assets:
+    ```bash
+    npm run build
+    ```
+
+## 8. Run the Development Server
+
+- Finally, start the Laravel development server by running:
+    ```bash
+    php artisan serve
+    ```
+    This should start the server at `http://127.0.0.1:8000` (by default), and the application will be up and running.
+
+---
+
+## Security Reminder:
+
+Since the `.env` file contains sensitive information (like database credentials, API keys, etc.), **never push it to GitHub** in a production environment. You should delete the `.env` from your repository and use `.gitignore` to prevent this in the future. If you need to keep a sample `.env`, use `.env.example` instead.
